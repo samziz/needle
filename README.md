@@ -20,4 +20,6 @@ $ RUSTFLAGS="-C target-cpu=native" cargo build
 
 ## Usage
 
-_coming soon_
+For a large dataset and heavy traffic, you should run Needle on a machine with >16GB of RAM and a multicore (>2-3) CPU with SIMD support. For now, there's no native support for distributed infrastructure, though it lends itself very naturally to user-implemented sharding.
+
+It's as simple as setting up a `systemd` task to start Needle with `needle --conf={MY_CONF_FILE}`. Needle is architected to safely handle 'pull-the-plug' SIGKILL termination, without having corrupted data or program state, though it will of course lose any unacknowledged writes, and no in-flight queries will be resumed.
